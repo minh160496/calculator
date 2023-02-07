@@ -223,6 +223,16 @@
 
     }
 
+    const testDiv0 = () =>
+    {
+        if ( calc.operator === '/' && calc.operandB === 0 )
+        {
+            alert( "Khong the chia cho 0" )
+            return true;
+        }
+        return false
+    }
+
 
     const logRes = () =>
     {
@@ -246,15 +256,23 @@
 
     const handleLogRes = () =>
     {
-        if ( !calc.log && calc.operandBrr.length > 0 )
+        if ( !testDiv0() )
         {
+            if ( !calc.log && calc.operandBrr.length > 0 )
+            {
 
-            logRes()
-            handleResetMath()
-        }
-        else if ( calc.operandBrr.length === 0 && calc.operator )
+                logRes()
+                handleResetMath()
+            }
+            else if ( calc.operandBrr.length === 0 && calc.operator )
+            {
+                alert( "Vui lòng nhập đúng biểu thức 2" )
+            }
+        } else
         {
-            alert( "Vui lòng nhập đúng biểu thức 2" )
+            handleResetMath()
+            displayOpr.innerText = ""
+            displayRes.innerText = "0"
         }
 
     }
