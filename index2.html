@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Andika:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Montserrat:wght@200;300;400;500;600&family=Passion+One:wght@700;900&family=Work+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600&display=swap"
+        rel="stylesheet">
+</head>
+<style>
+    :root {
+        --primaryColor: #394655;
+        --primaryColorBlur: #425062
+    }
+
+    .container {
+        width: 282px;
+        height: 352px;
+        margin: 0 auto;
+        margin-top: 120px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(5, 1fr);
+        grid-gap: 2px;
+        background-color: var(--primaryColorBlur);
+        border: 1px solid black;
+        box-sizing: border-box;
+        font-family: 'Inter', sans-serif;
+        box-sizing: border-box;
+        padding: 2px;
+    }
+
+    .content-center {
+        display: grid;
+        place-content: center;
+    }
+
+    .item {
+        border: 1px solid black;
+        color: #fff;
+        font-size: 28px;
+        font-weight: 600;
+        cursor: pointer;
+        padding: 0 8px;
+    }
+
+    .item-1 {
+        grid-column: 1/4;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: space-around;
+    }
+
+    .bold {
+        background-color: var(--primaryColor);
+    }
+
+    .display-operator {
+        max-block-size: 30px;
+        font-size: 1.1rem;
+        height: 25px;
+    }
+
+    .display-result {
+        height: 35px;
+        display: flex;
+        align-items: end;
+    }
+</style>
+
+<body>
+    <div class="app">
+        <div class="container calcular">
+            <div class="item content-center item-1 bold">
+                <div class="display-operator">
+
+                </div>
+                <div class="display-result">
+                    0
+                </div>
+            </div>
+            <div class="item content-center bold operator">*</div>
+            <div class="item content-center num">1</div>
+            <div class="item content-center num">2</div>
+            <div class="item content-center num">3</div>
+            <div class="item content-center div bold operator">/</div>
+            <div class="item content-center num">4</div>
+            <div class="item content-center num">5</div>
+            <div class="item content-center num">6</div>
+            <div class="item content-center sum bold operator">+</div>
+            <div class="item content-center num">7</div>
+            <div class="item content-center num">8</div>
+            <div class="item content-center num">9</div>
+            <div class="item content-center minus bold operator">-</div>
+            <div class="item content-center clear bold">C</div>
+            <div class="item content-center num">0</div>
+            <div class="item content-center pain num bold">.</div>
+            <div class="item content-center res bold">=</div>
+        </div>
+    </div>
+</body>
+
+<script>
+
+    const items = document.querySelectorAll( ".item:not(.res)" )
+    const displayOpr = document.querySelector( ".item-1 .display-operator" )
+    const displayRes = document.querySelector( ".item-1 .display-result" )
+    const nums = document.querySelectorAll( ".num" )
+    const res = document.querySelector( ".res" )
+    const clear = document.querySelector( ".clear" )
+
+
+    // Create a class for the calculator
+    class Calculator
+    {
+        // Define the constructor
+        constructor ()
+        {
+            this.operandA = 0;
+            this.operandB = 0;
+            this.operator = '';
+            this.operandArr = []
+            this.operandBrr = []
+            this.log = true
+
+        }
+
+        setLog ( boolean )
+        {
+            if ( typeof boolean === "boolean" )
+                this.log = boolean
+        }
+
+        setOperandsArr ( n, option )
+        {
+            if ( option === "left" )
+            {
+                this.operandArr.push( n )
+            }
+            if ( option === 'right' )
+            {
+                this.operandBrr.push( n )
+            }
+        }
+
+        // Define a setOperands function to set the operands of the calculator
+        setOperands ()
+        {
+            this.operandA = Number( this.operandArr.join( '' ) );
+            this.operandB = Number( this.operandBrr.join( '' ) );
+        }
+
+        // Define a setOperator function to set the operator of the calculator
+        setOperator ( op )
+        {
+            this.operator = op;
+        }
+
+        // Define a calculate function to calculate the result of two operands with an operator in between them  
+        calculate ()
+        {
+            switch ( this.operator )
+            {
+                case '+': return this.operandA + this.operandB; break;
+                case '-': return this.operandA - this.operandB; break;
+                case '*': return this.operandA * this.operandB; break;
+                case '/': return this.operandA / this.operandB; break;
+                default: console.log( 'Invalid Operator' ); break;
+            }
+        }
+    } // Create an instance of Calculator class let calc = new Calculator(); // Set operands and operator calc.setOperands(5, 10); calc.setOperator('+'); // Calculate and log result console.log(calc.calculate());										// Use switch statement to check which operator is used and perform respective operation on operands  			   case '+': return this.operandA + this.operandB;   break;   case '-': return this.operandA - this.operandB;   break;   case '*': return this.operandA * this.operandB;   break;   case '/': return this.operandA / this.operandB;   break;     default: console.log('Invalid Operator');     break;     }     } } // Create an instance of Calculator class let calc = new Calculator(); // Set operands and operator calc.setOperands(5, 10); calc.setOperator('+'); // Calculate and log result console.log(calc.calculate());
+
+    const calc = new Calculator()
+
+
+    const handleFade = ( e ) =>
+    {
+        let output = e.target.innerText
+        if ( !calc.log )
+        {
+            displayOpr.innerText += output;
+        } else
+        {
+            displayOpr.innerText = output;
+        }
+    }
+
+    const handleResetDplayOpr = ( valuePromt ) =>
+    {
+        displayOpr.innerText = valuePromt
+    }
+
+    const handleResetMath = () =>
+    {
+        calc.setOperator( '' )
+        calc.operandArr = []
+        calc.operandBrr = []
+        calc.setLog( true )
+        console.log( calc )
+
+    }
+
+
+    const test = ( element ) =>
+    {
+        const ope = "+-*/. "
+        const st = element.innerText.trim()
+        console.log( "test", st )
+        for ( let i = 0; i < st.length - 1; i++ )
+        {
+            if ( ope.includes( st[ i ] ) && ope.includes( st[ i + 1 ] ) )
+            {
+                alert( "Vui lòng nhập phép tính hợp lệ" )
+                element.innerText = "";
+                handleResetMath()
+            }
+        }
+
+
+    }
+
+
+    const logRes = () =>
+    {
+        calc.setOperands()
+        let resultVariable = calc.calculate()
+        const output = resultVariable
+        console.log( resultVariable )
+
+        let j = 9;
+        while ( String( resultVariable ).length > 11 && String( resultVariable ).includes( "." ) && j > 0 )
+        {
+            console.log( j )
+            j--
+            resultVariable = Number( resultVariable.toFixed( j ) )
+
+        }
+
+        displayRes.innerText = resultVariable
+        return output
+    }
+
+    const handleLogRes = () =>
+    {
+        if ( !calc.log && calc.operandBrr.length > 0 )
+        {
+
+            logRes()
+            handleResetMath()
+        }
+        else if ( calc.operandBrr.length === 0 && calc.operator )
+        {
+            alert( "Vui lòng nhập đúng biểu thức 2" )
+        }
+
+    }
+
+    const handleOperator = ( e ) =>
+    {
+        console.log( calc.log )
+        if ( calc.log )
+        {
+            const resOld = Number( displayRes.innerText.trim() )
+            calc.operandArr = [ resOld ]
+            displayOpr.innerText = resOld + displayOpr.innerText.trim()
+            calc.log = false
+        }
+
+        if ( calc.operandBrr.length > 0 )
+        {
+            const resu = logRes()
+            calc.operandArr = [ resu ]
+            calc.operandBrr = []
+        }
+        calc.setOperator( e.target.innerText.trim() )
+        console.log( "arr: ", calc.operandArr, "   brr: ", calc.operandBrr )
+        console.log( "arr: ", calc.operandArr, "   brr: ", calc.operandBrr, "tinh: ", calc.operator )
+
+        if ( displayOpr.innerText.trim().includes( "//" ) || displayOpr.innerText.trim().includes( "++" ) ||
+            displayOpr.innerText.trim().includes( "--" ) || displayOpr.innerText.trim().includes( "**" ) )
+        {
+            console.log( "trung" )
+            let outputOp = displayOpr.innerText.trim()
+            outputOp = outputOp.split( '' )
+            outputOp.splice( displayOpr.innerText.trim().indexOf( "++" ), 1 )
+            console.log( outputOp )
+            displayOpr.innerText = outputOp.join( '' )
+        }
+
+        test( displayOpr )
+
+
+    }
+
+    const handleOperands = ( e ) =>
+    {
+        calc.setLog( false )
+        const num = e.target.innerText.trim()
+        if ( calc.operator )
+        {
+            calc.setOperandsArr( num, "right" )
+        }
+        if ( !calc.operator )
+        {
+            calc.setOperandsArr( num, "left" )
+        }
+        console.log( "arr: ", calc.operandArr, "   brr: ", calc.operandBrr, "tinh: ", calc.operator )
+
+    }
+
+    const handleCLearAll = () =>
+    {
+        displayOpr.innerText = ""
+        displayRes.innerText = "0"
+        handleResetMath()
+        console.log( "a: ", calc.operandA, "   b: ", calc.operandB )
+        console.log( "arr: ", calc.operandArr, "   brr: ", calc.operandBrr, "tinh: ", calc.operator )
+
+    }
+
+    for ( let i = 0; i < items.length; i++ )
+    {
+        items[ i ].addEventListener( "click", handleFade )
+    }
+
+    res.addEventListener( "click", handleLogRes )
+    const operators = document.querySelectorAll( ".operator" )
+
+    for ( let j = 0; j < operators.length; j++ )
+    {
+        operators[ j ].addEventListener( "click", handleOperator )
+    }
+
+
+
+    for ( let j = 0; j < nums.length; j++ )
+    {
+        nums[ j ].addEventListener( "click", handleOperands )
+    }
+
+    clear.addEventListener( "click", handleCLearAll )
+
+</script>
+
+</html>
