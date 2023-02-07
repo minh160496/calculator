@@ -225,9 +225,9 @@
 
     const testDiv0 = () =>
     {
-        if ( calc.operator === '/' && calc.operandB === 0 )
+        if ( calc.operator === '/' && Number( calc.operandBrr.join( '' ) ) === 0 )
         {
-            alert( "Khong the chia cho 0" )
+            alert( "Không thể chia cho số 0" )
             return true;
         }
         return false
